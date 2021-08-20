@@ -25,7 +25,7 @@ describe('GitHub repos tests', async () => {
         });
     });
 
-    it('Should not get all repositories list without token', async () => {
+    it('Should not get all repositories list without Authorization', async () => {
       await axiosInstance
         .get('/user/repos', {
           headers: {
@@ -69,7 +69,17 @@ context('Create and modify repository', async () => {
           accept: 'application/vnd.github.v3+json',
         },
       })
-      .catch((err) => expect(err.response.status).equal(422));
+      .catch((err) => {
+        expect(err.response.status).equal(422);
+        expect(err.response.data.message).equal('Repository creation failed.');
+      });
+  });
+
+  it('Should not create new repository without Authorization', async () => {
+    await axiosInstance.post('/user/repos', newRepo).catch((err) => {
+      expect(err.response.status).equal(401);
+      expect(err.response.data.message).equal('Requires authentication');
+    });
   });
 
   it('Should delete repository', async () => {
@@ -83,6 +93,3 @@ context('Create and modify repository', async () => {
       .then((res) => expect(res.status).equal(204));
   });
 });
-
-// .then((res) => console.log(res))
-// .catch((err) => console.log(err));
