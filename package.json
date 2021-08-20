@@ -3,10 +3,7 @@
   "version": "1.0.1",
   "description": "",
   "scripts": {
-    "test root": "NODE_ENV=local mocha ./_test/root.spec.js --timeout 10000 -r dotenv/config --require @babel/register --exit",
-    "test login": "NODE_ENV=local mocha ./_test/root.spec.js ./_test/login.spec.js --timeout 10000 -r dotenv/config --require @babel/register --exit",
-    "test getUser": "NODE_ENV=local mocha ./_test/root.spec.js _test/userGetById.js --timeout 10000 -r dotenv/config --require @babel/register --exit",
-    "test userSearch": "NODE_ENV=local mocha ./_test/root.spec.js _test/userSearch.js --timeout 10000 -r dotenv/config --require @babel/register --exit"
+    "test repo": "NODE_ENV=local mocha _src/reposTest.spec.js --timeout 10000 --require dotenv/config -r @babel/register --exit"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +11,7 @@
   "dependencies": {
     "@babel/eslint-parser": "^7.15.0",
     "axios": "^0.21.1",
+    "babel-eslint": "^10.1.0",
     "cross-env": "^7.0.3",
     "dotenv": "^10.0.0",
     "eslint-config-prettier": "^8.3.0",
